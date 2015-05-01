@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 		$(".block").each(function(index){
 			$(this).on("click", function(){
-					if($(this).hasClass("x")){
+					if($(this).hasClass("x") || $(this).hasClass("o")){
 						console.log("block full");
 					}
 					else if(lastPlayer === true){
@@ -86,7 +86,7 @@ $(document).ready(function(){
 
 		var restartGame = function(){
 			// Will clear board, but retain names
-			$(".block").empty();
+			// $(".block").empty();
 			$(".block").removeClass("x");
 			$(".block").removeClass("o");
 		}
