@@ -2,38 +2,12 @@ $(document).ready(function(){
 	console.log("hi");
 
 	var restart = document.querySelector(".restart");
-	// var nameList = [];
-	// var playerX = null;
-	// var playerO = null;
-	console.log(restart);
+	var playerX = true;
+	var playerO = false;
 
-		// var fillBoard = function() {
-		// 	for(i = 0; i < 9; i++){
-		// 		var newBlock = document.createElement("div");
-		// 		newBlock.className = "block";
-		// 		$("#board").append(newBlock);
-		// 	}
-		// }
 
-		// var collectNames = function(){
-		// 	// will collect two names and make them playerX and playerO
-		// 	var name = document.getElementById("name");
-		// 	console.log("name: " + name);
-		// 	if(nameList.length === 2){
-		// 		alert("There are already two players!")
-		// 	}
-		// 	else{
-		// 		nameList.push(name);
-		// 	}
-		// 		console.log(nameList);
-				var playerX = true;
-				var playerO = false;
-		// 		$("turns").text(playerX);
-		// }
-
+//switching between players
 		var lastPlayer = playerX;
-		console.log("lastPlayer =" + lastPlayer);
-
 		function takeTurns(){
 			if(lastPlayer === playerX){
 				$(".turns").text("Player O");
@@ -45,7 +19,7 @@ $(document).ready(function(){
 			}
 		}
 
-
+//marking Xs and Os
 		$(".block").each(function(index){
 			$(this).on("click", function(){
 					if($(this).hasClass("x") || $(this).hasClass("o")){
@@ -54,34 +28,76 @@ $(document).ready(function(){
 					else if(lastPlayer === true){
 						$(this).toggleClass("x");
 						console.log("mark X");
+						gamePlay();
 						takeTurns();
 					}
 					else{
 						$(this).toggleClass("o");
-						console.log("mark O")
+						console.log("mark O");
+						gamePlay();
 						takeTurns();
 					}
-
 			});
 		})
 
+		// var allRows = $(".row");
+		// console.log(allRows);
+		// console.log(allRows[1]);
+		// var someBlocks = document.getElementsByClassName("row")[0].getElementsByClassName("x");
+		// if(someBlocks.length === 3);
+		// console.log(someBlocks);
+		// var foundBlocks = allRows.querySelectorAll(".block");
+		// console.log(foundBlocks);
+		// console.log(allRows[0].foundBlocks.length);
+
 		var gamePlay = function(){
-			$("#board").on("click", function(){
-				var kids = $(".block").children();
-				if(kids.length == 9){
-					gameFinished();
-				}
-				})
+			// var xBlocks = $(".x");
+			// if($(xBlocks).attr("data-row1").length === 3){
+			// 	announceWinner();
+			// }
+			var allRows = $(".row");
+			console.log(allRows);
+			// var row1 = document.getElementsByClassName("row");
+			var row1Xs = document.getElementsByClassName("row")[0].getElementsByClassName("x");
+			var row2Xs = document.getElementsByClassName("row")[1].getElementsByClassName("x");
+			var row3Xs = document.getElementsByClassName("row")[2].getElementsByClassName("x");
+			var row1Os = document.getElementsByClassName("row")[0].getElementsByClassName("o");
+			var row2Os = document.getElementsByClassName("row")[1].getElementsByClassName("o");
+			var row3Os = document.getElementsByClassName("row")[2].getElementsByClassName("o");
+			var classX = document.getElementsByClassName("x");
+			console.log(classX);
+			// console.log(row1Xs.firstChild.getElementsByClass("x"));
+			if(row1Xs.length === 3 || row2Xs.length === 3 || row3Xs.length === 3){
+				announceWinner();
+			}
+			else if(row1Os.length === 3 || row2Os.length === 3 || row3Os.length === 3){
+				announceWinner();
+			}
+			else if(row1Xs.firstChild === 1 && row2Xs.firstChild === 1 && row3Xs.firstChild === 1){
+				announceWinner();
+			}
+			gameBoardFull();
 		}
 
+		var announceWinner = function(){
+			if(lastPlayer === true){
+				alert("Player X wins!");
+			}
+			else{
+				alert("Player O wins!");
+			}
+		}
+
+	//checks to see if all squares are taken, if so, then gameFinished
 		var gameBoardFull = function(){
-			//checks to see if all squares are taken, if so, then gameFinished
+			if($(".x").length === 5 || $(".o").length === 5){
+				alert("Draw!");
+				finishedGame();
+			}
 		}
 
-		var gameFinished = function(){
-			console.log("Finished Game");
-			//checks to see if Xs or Os won (gamePlay) then either says who won or says there are no winners (gameBoardFull)
-			//Waits and then clears board/names?
+		var finishedGame = function(){
+			// $(restartGame)
 		}
 
 		var restartGame = function(){
@@ -93,5 +109,5 @@ $(document).ready(function(){
 
 
 		$(".restart").click(restartGame);
-
+		gamePlay();
 	});

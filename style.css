@@ -26,7 +26,6 @@
 }
 
 .block:hover {
-	/*background-color:rgba(255, 299, 69, .5);*/
 	box-shadow: inset 0px 0px 10px 1px #FFE545;
 }
 
@@ -39,14 +38,6 @@
 	background:url(purpleo.png);
 	background-size:100%;
 }
-
-/*
-#input-name {
-	margin-left: 10px;
-	display: block;
-	float: left;
-	padding: 20px;
-}*/
 
 .turns{
 	width: 100px;
